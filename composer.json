@@ -1,0 +1,17 @@
+{
+  "name": "biont/wordpress-asset-bundles",
+  "type": "package",
+  "description": "Bundle all kinds of assets and enqueue them at once",
+  "keywords": [
+    "wordpress",
+    "assets"
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Biont\\AssetBundles\\": "./inc"
+    }
+  }
+}
