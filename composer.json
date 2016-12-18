@@ -9,6 +9,10 @@
   "require": {
     "php": ">=5.4.0"
   },
+  "require-dev": {
+    "brain/monkey": "~1.4",
+    "phpunit/phpunit": "~4.8"
+  },
   "autoload": {
     "psr-4": {
       "Biont\\AssetBundles\\": "./inc"
