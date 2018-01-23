@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Biont\\AssetBundles\\": "./inc"
+      "Biont\\AssetBundles\\": "./src"
     }
   },
   "autoload-dev": {
