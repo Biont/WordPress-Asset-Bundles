@@ -8,9 +8,6 @@
 
 namespace Biont\AssetBundles;
 
-
-use Biont\WPCore\Registerable;
-
 class AssetBundle implements Registerable {
 
 	private $handle;
@@ -22,7 +19,7 @@ class AssetBundle implements Registerable {
 	/**
 	 * AssetBundle constructor.
 	 *
-	 * @param $handle
+	 * @param         $handle
 	 * @param Asset[] $assets
 	 */
 	public function __construct( $handle, array $assets ) {
@@ -35,17 +32,18 @@ class AssetBundle implements Registerable {
 	 * Enqueues all assets
 	 */
 	public function provide() {
+
 		foreach ( $this->assets as $asset ) {
 			$asset->enqueue();
 		}
 	}
 
-	/**
-	 * @return Registerable
-	 */
-	public function register() {
+	public function register(): bool {
+
 		foreach ( $this->assets as $asset ) {
 			$asset->register();
 		}
+
+		return true;
 	}
 }

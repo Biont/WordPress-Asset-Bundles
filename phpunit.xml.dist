@@ -1,28 +1,18 @@
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/4.8/phpunit.xsd"
-         bootstrap="./tests/boot.php"
-         backupGlobals="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         stopOnFailure="false">
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-            <directory suffix=".php">./inc</directory>
-            <exclude>
-                <directory>./tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-clover" target="./coverage.xml"/>
-    </logging>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="vendor/inpsyde/monkery-test-case/inc/bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+>
+    <php>
+        <env name="PATCHWORK_CACHE_USE_SYSTEM_TEMP_DIR" value="true" />
+    </php>
     <testsuites>
-        <testsuite name="Unit">
-            <directory>./tests/src/</directory>
+        <testsuite name="WordPress Asset Bundles -  PHP unit tests">
+            <directory suffix="Test.php">./tests/PHPUnit</directory>
         </testsuite>
     </testsuites>
 </phpunit>

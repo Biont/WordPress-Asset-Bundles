@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: biont
- * Date: 03.12.16
- * Time: 01:31
- */
+declare( strict_types=1 );
 
 namespace Biont\AssetBundles;
 
-
 abstract class WPAsset extends Asset {
-
 
 	/**
 	 * @var string;
@@ -21,52 +14,45 @@ abstract class WPAsset extends Asset {
 	 * @var array
 	 */
 	private $deps;
+	/**
+	 * @var AssetUriGenerator
+	 */
+	private $uriGen;
 
-	public function __construct( $handle, $path, $deps = [] ) {
+	public function __construct(
+		$handle,
+		$path,
+		$deps = [],
+		AssetUriGenerator $uriGen = null
+	) {
+
 		parent::__construct( $handle, $path );
 		$this->deps = $deps;
 
+		$this->uriGen = $uriGen ?? new AssetUriGenerator( $path );
 	}
 
-	/**
-	 * Produce a URL to this asset file.
-	 *
-	 * It will assume that any asset is located somewhere below the wp-content folder (which may be called differently)
-	 * Based on that, it will traverse the file's directpories upwards until the WP_CONTENT_DIR base name is found.
-	 *
-	 * Then the found fragments are appended to the content_url()
-	 *
-	 * @return string
-	 */
-	public function get_src() {
+	public function getSrc() {
 
-		if ( is_null( $this->src ) ) {
+		if ( null === $this->src ) {
+			$this->src = $this->uriGen->getUri();
 
-			$root_dir   = wp_normalize_path( dirname( $this->path ) );
-			$parts      = explode( DIRECTORY_SEPARATOR, $root_dir );
-			$wp_content = basename( WP_CONTENT_DIR );
-			while ( array_shift( $parts ) !== $wp_content ) {
-				//We don't actually need to do anything here
-			}
-			$root_url  = content_url( '/' . implode( '/', $parts ) );
-			$this->src = trailingslashit( $root_url ) . basename( $this->path );
 		}
 
 		return $this->src;
 
 	}
 
-	/**
-	 * @return array
-	 */
-	public function get_deps() {
+	public function getDeps(): array {
+
 		return $this->deps;
 	}
 
 	/**
 	 * @return string|bool
 	 */
-	public function get_version() {
-		return filemtime( $this->path );
+	public function getVersion(): string {
+
+		return (string) filemtime( $this->path );
 	}
 }

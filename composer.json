@@ -1,5 +1,6 @@
 {
   "name": "biont/wordpress-asset-bundles",
+  "license": "MIT",
   "type": "package",
   "description": "Bundle all kinds of assets and enqueue them at once",
   "keywords": [
@@ -7,15 +8,21 @@
     "assets"
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=7"
   },
   "require-dev": {
-    "brain/monkey": "~1.4",
-    "phpunit/phpunit": "~4.8"
+    "inpsyde/monkery-test-case": "^4.0",
+    "phpunit/phpunit": "^6.5"
   },
   "autoload": {
     "psr-4": {
       "Biont\\AssetBundles\\": "./inc"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Biont\\AssetBundles\\Test\\Helper\\": "./tests/Helper",
+      "": "./tests/Stubs"
     }
   }
 }

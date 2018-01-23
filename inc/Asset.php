@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: biont
- * Date: 17.11.16
- * Time: 20:42
- */
+declare( strict_types=1 );
 
 namespace Biont\AssetBundles;
 
-
 abstract class Asset {
+
 	/**
 	 * @var string
 	 */
@@ -20,43 +15,33 @@ abstract class Asset {
 	 */
 	protected $path;
 
-
 	/**
 	 * Asset constructor.
 	 *
 	 * @param $handle
 	 * @param $path
 	 *
-	 * @throws \Exception
+	 * @throws \InvalidArgumentException
 	 */
-	public function __construct( $handle, $path ){
+	public function __construct( $handle, $path ) {
+
 		if ( ! file_exists( $path ) ) {
-			throw new \Exception( "Asset file not found: {$path}" );
+			throw new \InvalidArgumentException( "Asset file not found: {$path}" );
 		}
 		$this->handle = $handle;
 		$this->path   = $path;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function get_handle() {
+	public function getHandle(): string {
+
 		return $this->handle;
 	}
 
+	abstract public function register(): bool;
 
+	abstract public function isRegistered(): bool;
 
-	abstract public function register();
+	abstract public function enqueue(): bool;
 
-	/**
-	 * @return bool
-	 */
-	abstract public function is_registered();
-
-	abstract public function enqueue();
-
-	/**
-	 * @return bool
-	 */
-	abstract public function is_enqueued();
+	abstract public function isEnqueued(): bool;
 }

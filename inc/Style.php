@@ -8,54 +8,68 @@
 
 namespace Biont\AssetBundles;
 
-
 class Style extends WPAsset {
+
 	private $media;
 
-	public function __construct( $handle, $path, $deps = [], $media = 'all' ) {
+	public function __construct(
+		$handle,
+		$path,
+		$deps = [],
+		$media = 'all',
+		AssetUriGenerator $uriGen = null
+
+	) {
+
 		$this->media = $media;
-		parent::__construct( $handle, $path, $deps );
+		parent::__construct( $handle, $path, $deps, $uriGen );
 	}
 
-	public final function register() {
-		if ( $this->is_registered() ) {
-			return;
-		}
-		wp_register_style(
-			$this->get_handle(),
-			$this->get_src(),
-			$this->get_deps(),
-			$this->get_version(),
-			$this->media
-		);
-	}
+	final public function enqueue(): bool {
 
-	public final function enqueue() {
-		if ( $this->is_enqueued() ) {
-			return;
+		if ( $this->isEnqueued() ) {
+			return true;
 		}
 
-		if ( ! $this->is_registered() ) {
+		if ( ! $this->isRegistered() ) {
 			$this->register();
 		}
 
 		wp_enqueue_style(
-			$this->get_handle()
+			$this->getHandle()
 		);
-	}
 
-
-	/**
-	 * @return bool
-	 */
-	public function is_registered() {
-		return wp_style_is( $this->get_handle(), 'registered' );
+		return true;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function is_enqueued() {
-		return wp_style_is( $this->get_handle() );
+	public function isEnqueued(): bool {
+
+		return wp_style_is( $this->getHandle() );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isRegistered(): bool {
+
+		return wp_style_is( $this->getHandle(), 'registered' );
+	}
+
+	final public function register(): bool {
+
+		if ( $this->isRegistered() ) {
+			return true;
+		}
+
+		return wp_register_style(
+			$this->getHandle(),
+			$this->getSrc(),
+			$this->getDeps(),
+			$this->getVersion(),
+			$this->media
+		);
 	}
 }
