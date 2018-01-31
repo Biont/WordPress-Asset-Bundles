@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Biont\AssetBundles;
 
-abstract class Asset
+abstract class Asset implements Enqueueable
 {
 
     /**

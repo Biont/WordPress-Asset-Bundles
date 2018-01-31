@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: biont
- * Date: 18.11.16
- * Time: 22:16
- */
+declare(strict_types=1);
 
 namespace Biont\AssetBundles;
 
-class AssetBundle implements Registerable
+class AssetBundle implements Enqueueable
 {
 
     private $handle;
@@ -50,4 +45,39 @@ class AssetBundle implements Registerable
 
         return true;
     }
+
+    public function enqueue(): bool
+    {
+
+        foreach ($this->assets as $asset) {
+            $asset->enqueue();
+        }
+
+        return true;
+    }
+
+    public function isEnqueued(): bool
+    {
+
+        foreach ($this->assets as $asset) {
+            if (! $asset->isEnqueued()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function isRegistered(): bool
+    {
+
+        foreach ($this->assets as $asset) {
+            if (! $asset->isRegistered()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

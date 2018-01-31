@@ -6,4 +6,6 @@ interface Registerable
 {
 
     public function register(): bool;
+
+    public function isRegistered(): bool;
 }
