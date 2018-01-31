@@ -8,42 +8,46 @@
 
 namespace Biont\AssetBundles;
 
-class AssetBundle implements Registerable {
+class AssetBundle implements Registerable
+{
 
-	private $handle;
-	/**
-	 * @var Asset[]
-	 */
-	private $assets;
+    private $handle;
+    /**
+     * @var Asset[]
+     */
+    private $assets;
 
-	/**
-	 * AssetBundle constructor.
-	 *
-	 * @param         $handle
-	 * @param Asset[] $assets
-	 */
-	public function __construct( $handle, array $assets ) {
+    /**
+     * AssetBundle constructor.
+     *
+     * @param         $handle
+     * @param Asset[] $assets
+     */
+    public function __construct($handle, array $assets)
+    {
 
-		$this->handle = $handle;
-		$this->assets = $assets;
-	}
+        $this->handle = $handle;
+        $this->assets = $assets;
+    }
 
-	/**
-	 * Enqueues all assets
-	 */
-	public function provide() {
+    /**
+     * Enqueues all assets
+     */
+    public function provide()
+    {
 
-		foreach ( $this->assets as $asset ) {
-			$asset->enqueue();
-		}
-	}
+        foreach ($this->assets as $asset) {
+            $asset->enqueue();
+        }
+    }
 
-	public function register(): bool {
+    public function register(): bool
+    {
 
-		foreach ( $this->assets as $asset ) {
-			$asset->register();
-		}
+        foreach ($this->assets as $asset) {
+            $asset->register();
+        }
 
-		return true;
-	}
+        return true;
+    }
 }

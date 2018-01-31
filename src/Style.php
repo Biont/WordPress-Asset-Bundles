@@ -8,68 +8,73 @@
 
 namespace Biont\AssetBundles;
 
-class Style extends WPAsset {
+class Style extends WPAsset
+{
 
-	private $media;
+    private $media;
 
-	public function __construct(
-		$handle,
-		$path,
-		$deps = [],
-		$media = 'all',
-		AssetUriGenerator $uriGen = null
+    public function __construct(
+        $handle,
+        $path,
+        $deps = [],
+        $media = 'all',
+        AssetUriGenerator $uriGen = null
 
-	) {
+    ) {
 
-		$this->media = $media;
-		parent::__construct( $handle, $path, $deps, $uriGen );
-	}
+        $this->media = $media;
+        parent::__construct($handle, $path, $deps, $uriGen);
+    }
 
-	final public function enqueue(): bool {
+    final public function enqueue(): bool
+    {
 
-		if ( $this->isEnqueued() ) {
-			return true;
-		}
+        if ($this->isEnqueued()) {
+            return true;
+        }
 
-		if ( ! $this->isRegistered() ) {
-			$this->register();
-		}
+        if (! $this->isRegistered()) {
+            $this->register();
+        }
 
-		wp_enqueue_style(
-			$this->getHandle()
-		);
+        wp_enqueue_style(
+            $this->getHandle()
+        );
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isEnqueued(): bool {
+    /**
+     * @return bool
+     */
+    public function isEnqueued(): bool
+    {
 
-		return wp_style_is( $this->getHandle() );
-	}
+        return wp_style_is($this->getHandle());
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isRegistered(): bool {
+    /**
+     * @return bool
+     */
+    public function isRegistered(): bool
+    {
 
-		return wp_style_is( $this->getHandle(), 'registered' );
-	}
+        return wp_style_is($this->getHandle(), 'registered');
+    }
 
-	final public function register(): bool {
+    final public function register(): bool
+    {
 
-		if ( $this->isRegistered() ) {
-			return true;
-		}
+        if ($this->isRegistered()) {
+            return true;
+        }
 
-		return wp_register_style(
-			$this->getHandle(),
-			$this->getSrc(),
-			$this->getDeps(),
-			$this->getVersion(),
-			$this->media
-		);
-	}
+        return wp_register_style(
+            $this->getHandle(),
+            $this->getSrc(),
+            $this->getDeps(),
+            $this->getVersion(),
+            $this->media
+        );
+    }
 }

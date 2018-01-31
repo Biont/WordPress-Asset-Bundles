@@ -1,25 +1,29 @@
 <?php # -*- coding: utf-8 -*-
-declare( strict_types=1 );
+declare(strict_types=1);
 
 namespace Biont\AssetBundles\Test\Helper;
 
-class DummyDataProvider {
+class DummyDataProvider
+{
 
-	public static function getScriptFile(): string {
+    public static function getScriptFile(): string
+    {
 
-		return self::getDataDir() . 'testscript.js';
+        return self::getDataDir() . 'testscript.js';
 
-	}
+    }
 
-	public static function getStyleFile(  ) {
+    private static function getDataDir(): string
+    {
 
-		return self::getDataDir() . 'teststylesheet.css';
+        return \dirname(__DIR__) . '/dummyData/';
 
-	}
+    }
 
-	private static function getDataDir(): string {
+    public static function getStyleFile()
+    {
 
-		return \dirname( __DIR__ ) . '/dummyData/';
+        return self::getDataDir() . 'teststylesheet.css';
 
-	}
+    }
 }

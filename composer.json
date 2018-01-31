@@ -1,28 +1,28 @@
 {
-  "name": "biont/wordpress-asset-bundles",
-  "license": "MIT",
-  "type": "package",
-  "description": "Bundle all kinds of assets and enqueue them at once",
-  "keywords": [
-    "wordpress",
-    "assets"
-  ],
-  "require": {
-    "php": ">=7"
-  },
-  "require-dev": {
-    "inpsyde/monkery-test-case": "^4.0",
-    "phpunit/phpunit": "^6.5"
-  },
-  "autoload": {
-    "psr-4": {
-      "Biont\\AssetBundles\\": "./src"
+    "name": "biont/wordpress-asset-bundles",
+    "license": "MIT",
+    "type": "package",
+    "description": "Bundle all kinds of assets and enqueue them at once",
+    "keywords": [
+        "wordpress",
+        "assets"
+    ],
+    "require": {
+        "php": ">=7"
+    },
+    "require-dev": {
+        "inpsyde/monkery-test-case": "^4.0",
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Biont\\AssetBundles\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Biont\\AssetBundles\\Test\\Helper\\": "./tests/Helper",
+            "": "./tests/Stubs"
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Biont\\AssetBundles\\Test\\Helper\\": "./tests/Helper",
-      "": "./tests/Stubs"
-    }
-  }
 }

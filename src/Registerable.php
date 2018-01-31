@@ -2,7 +2,8 @@
 
 namespace Biont\AssetBundles;
 
-interface Registerable {
+interface Registerable
+{
 
-	public function register(): bool;
+    public function register(): bool;
 }
